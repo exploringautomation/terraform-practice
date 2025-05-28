@@ -13,8 +13,17 @@ phases:
     commands:
       - echo Building the app...
       - npm run build
+      - cd ..
+      - mkdir -p build-output
+      - cp -r app/* build-output/
 
   post_build:
     commands:
       - echo Build complete!
+      - zip -r app-artifact.zip build-output
+
+artifacts:
+  files:
+    - app-artifact.zip
+  discard-paths: yes
 
